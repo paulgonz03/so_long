@@ -20,9 +20,11 @@ int main(int argc,char **argv)
         if (mapdata.mape == NULL)
             return (1);
         if (ft_checkmap(&mapdata) == 1)
-            return(1);//if ft_checkmap == 1 beacause if the map is not valid its gonna give you leaks
+            return(printf("error de cheakmap\n"), 1);//if ft_checkmap == 1 beacause if the map is not valid its gonna give you leaks
         if (ft_cheakmatrix(&mapdata, readdata.lines) == 1)
-            return(1);
+            return(printf("error de cheakmatrix\n"), 1);
+        if (ft_cheakwalls(&mapdata, &readdata) == 1)
+            return(printf("error de cheakwalls\n"), 1);
         ft_lookforP(&mapdata);
         copymap(&mapdata, &readdata);
         ft_flood_fill(&mapdata, mapdata.x, mapdata.y);
@@ -31,14 +33,14 @@ int main(int argc,char **argv)
             return(1);
     }
     	
-    void	*mlx;
-	void *img;
-    char	*relative_path = "./test.xpm";
-	int		img_width;
-	int		img_height;
+    // void	*mlx;
+	// void *img;
+    // char	*relative_path = "./test.xpm";
+	// int		img_width;
+	// int		img_height;
 
-	mlx = mlx_init();
-    img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	mlx_loop(mlx);
-    (void)img;
+	// mlx = mlx_init();
+    // img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+	// mlx_loop(mlx);
+    // (void)img;
 }

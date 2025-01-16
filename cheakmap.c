@@ -52,6 +52,37 @@ int ft_cheakmatrix(t_map *mapdata, size_t linesnum)
     }
     return (0);
 }
+int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
+{
+    int i;
+    int j;
+    int auxlines;
+
+    i = 0;
+    j = 0;
+    auxlines = readdata->lines;
+    auxlines--;
+    while (mapdata->mape[j][i++])
+    {
+        printf("%c\n", mapdata->mape[j][i]);
+        if (mapdata->mape[j][i] != '1')
+            return (printf("muro arriba\n"), 1);
+    }
+    i = 0;
+    while (mapdata->mape[auxlines][i++])
+        if (mapdata->mape[auxlines][i] != '1')
+            return (printf("muro abajo\n"), 1);
+    i--;
+    while (mapdata->mape[j++][i])
+        if (mapdata->mape[j][i] != '1')
+            return (printf("muro derecha\n"), 1);
+    i = 0;
+    j = 0;
+    while (mapdata->mape[j++][i])
+        if (mapdata->mape[j][i] != '1')
+            return (printf("muro izquierda\n"), 1);
+    return(0);
+}
 
 void ft_lookforP(t_map *mapdata)
 {

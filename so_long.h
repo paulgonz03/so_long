@@ -51,6 +51,6 @@ void ft_flood_fill(t_map *mapdata, int x, int y);
 void printmap(char **map);
 int cheakprintmap(t_map *mapdata);
 void copymap(t_map *mapdata, t_readmap *readdata);
-
+int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
 
 #endif
