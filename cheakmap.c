@@ -62,11 +62,13 @@ int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
     j = 0;
     auxlines = readdata->lines;
     auxlines--;
-    while (mapdata->mape[j][i++])
+    printmap(mapdata->mape);
+    while (mapdata->mape[j][i] != '\0')
     {
         printf("%c\n", mapdata->mape[j][i]);
-        if (mapdata->mape[j][i] != '1')
+        if (mapdata->mape[j][i] != '1' && mapdata->mape[j][i] != '\n' )
             return (printf("muro arriba\n"), 1);
+        i++;
     }
     i = 0;
     while (mapdata->mape[auxlines][i++])
