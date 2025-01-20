@@ -7,7 +7,7 @@ int main(int argc,char **argv)
     t_map mapdata;
     t_readmap readdata;
 
-    i= 0;
+    i = 0;
     if (argc != 2)
         return (1);
     while (argv[1][i] != '\0')
@@ -18,7 +18,7 @@ int main(int argc,char **argv)
     {
         mapdata.mape = ft_readmap(argv, &readdata);
         if (mapdata.mape == NULL)
-            return (1);
+            return (printf("salto de linea o vacio\n"), 1);
         if (ft_checkmap(&mapdata) == 1)
             return(printf("error de cheakmap\n"), 1);//if ft_checkmap == 1 beacause if the map is not valid its gonna give you leaks
         if (ft_cheakmatrix(&mapdata, readdata.lines) == 1)
@@ -28,19 +28,34 @@ int main(int argc,char **argv)
         ft_lookforP(&mapdata);
         copymap(&mapdata, &readdata);
         ft_flood_fill(&mapdata, mapdata.x, mapdata.y);
-        // printmap(mapdata.mape);
         if (cheakprintmap(&mapdata) == 1)
-            return(1);
+            return(printf("error de cheakprintmap"), 1);
     }
-    	
-    // void	*mlx;
-	// void *img;
-    // char	*relative_path = "./test.xpm";
-	// int		img_width;
-	// int		img_height;
+    else
+        return(printf("no hay .ber\n"), 1);
+    
 
-	// mlx = mlx_init();
-    // img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	// mlx_loop(mlx);
-    // (void)img;
+	// t_vars	vars;
+
+	// vars.mlx = mlx_init();
+	// vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
+	// mlx_key_hook(vars.win, key_hook, &vars);
+	// mlx_loop(vars.mlx);
 }
+
+// int	key_hook(int keycode, t_vars *vars)
+// {
+// 	printf("Hello from key_hook!\n");
+// 	return (0);
+//     keycode = keycode;
+//     vars = vars;
+
+
+
+//     A = 38
+//     s = 39
+//     D = 40
+//     W = 25
+//     esc = 53
+// }
+

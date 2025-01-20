@@ -56,35 +56,32 @@ int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
 {
     int i;
     int j;
+    int lastcolum;
     int auxlines;
 
     i = 0;
     j = 0;
     auxlines = readdata->lines;
     auxlines--;
-    printmap(mapdata->mape);
-    while (mapdata->mape[j][i] != '\0')
-    {
-        printf("%c\n", mapdata->mape[j][i]);
-        if (mapdata->mape[j][i] != '1' && mapdata->mape[j][i] != '\n' )
+    lastcolum = strlen(mapdata->mape[auxlines]) - 1;
+    while (mapdata->mape[j++][i] && j <= auxlines)
+        if (mapdata->mape[j][i] && mapdata->mape[j][i] != '\n' &&mapdata->mape[j][i] != '1')
+            return (printf("muro izquierda\n"), 1);
+    j = 0;
+    while (mapdata->mape[j++][lastcolum] && j <= auxlines)
+        if (mapdata->mape[j][lastcolum] && mapdata->mape[j][lastcolum] != '\n' && mapdata->mape[j][lastcolum] != '1')
+            return (printf("muro derecha\n"), 1);
+    j = 0;
+    while (mapdata->mape[j][i++] != '\0')
+        if (mapdata->mape[j][i] && mapdata->mape[j][i] != '\n' && mapdata->mape[j][i] != '1')
             return (printf("muro arriba\n"), 1);
-        i++;
-    }
     i = 0;
     while (mapdata->mape[auxlines][i++])
-        if (mapdata->mape[auxlines][i] != '1')
+        if (mapdata->mape[j][i] && mapdata->mape[j][i] != '\n' && mapdata->mape[auxlines][i] != '1')
             return (printf("muro abajo\n"), 1);
-    i--;
-    while (mapdata->mape[j++][i])
-        if (mapdata->mape[j][i] != '1')
-            return (printf("muro derecha\n"), 1);
-    i = 0;
-    j = 0;
-    while (mapdata->mape[j++][i])
-        if (mapdata->mape[j][i] != '1')
-            return (printf("muro izquierda\n"), 1);
     return(0);
 }
+
 
 void ft_lookforP(t_map *mapdata)
 {

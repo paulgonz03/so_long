@@ -79,6 +79,5 @@ void copymap(t_map *mapdata, t_readmap *readdata)
        strcpy (mapdata->copymap[j], mapdata->mape[j]);
         j++;
     }
-    printmap(mapdata->copymap);
     return ;
 }

@@ -33,6 +33,12 @@ typedef struct s_map
     char **copymap;
 } t_map;
 
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+} t_vars;
+
+
 
 char	*get_next_line(int fd);
 char	*extract_line(char *aux_read);
@@ -52,5 +58,7 @@ void printmap(char **map);
 int cheakprintmap(t_map *mapdata);
 void copymap(t_map *mapdata, t_readmap *readdata);
 int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
+int cheak(t_map *mapdata, t_readmap *readdata);
+int	key_hook(int keycode, t_vars *vars);
 
 #endif
