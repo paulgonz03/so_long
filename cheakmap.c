@@ -83,13 +83,13 @@ int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
 }
 
 
-void ft_lookforP(t_map *mapdata)
+void ft_lookforP(t_map *mapdata, char **mape)
 {
-    while (mapdata->mape[mapdata->y])
+    while (mape[mapdata->y])
     {
-        while (mapdata->mape[mapdata->y][mapdata->x])
+        while (mape[mapdata->y][mapdata->x])
         {
-            if (mapdata->mape[mapdata->y][mapdata->x] == 'P')
+            if (mape[mapdata->y][mapdata->x] == 'P')
                 return ;
             mapdata->x++;
         }

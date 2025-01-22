@@ -13,6 +13,16 @@
 #  define BUFFER_SIZE 42
 # endif
 
+#define keyA 97
+#define keyS 115
+#define keyD 100
+#define keyW 119
+#define keyup 65362
+#define keyright 65363
+#define keydown 65364
+#define keyleft 65361
+#define keyESC 65307
+
 
 typedef struct s_readmap
 {
@@ -52,13 +62,13 @@ int main(int argc,char **argv);
 int ft_checkmap(t_map *mapdata);
 int	mystrchr(const char *src, int c);
 int ft_cheakmatrix(t_map *mapdata, size_t linesnum);
-void ft_lookforP(t_map *mapdata);
+void ft_lookforP(t_map *mapdata, char **mape);
 void ft_flood_fill(t_map *mapdata, int x, int y);
 void printmap(char **map);
 int cheakprintmap(t_map *mapdata);
 void copymap(t_map *mapdata, t_readmap *readdata);
 int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
-int cheak(t_map *mapdata, t_readmap *readdata);
-int	key_hook(int keycode, t_vars *vars);
+void pixeltoimage(t_map *mapdata, void *mlx);
+int moveplyr(t_map *mapdata, int keycode);
 
 #endif
