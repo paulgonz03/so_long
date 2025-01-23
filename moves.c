@@ -1,20 +1,16 @@
 #include "so_long.h"
 #include  "minilibx-linux/mlx.h"
 
-void pixeltoimage(t_map *mapdata, void *mlx)
+void pixeltoimage(t_map *mapdata, t_img *img)
 {
     int i;
     int j;
-    void	*img;
-	int		img_width;
-	int		img_height;
-    void	*mlx_win;
     int x = 0;
     int y = 0;
 
 
     j = 0;
-    mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+    img->win = mlx_new_window(img->mlx, 1920, 1080, "Hello world!");
     while (mapdata->copymap[j])
     {
         i = 0;
@@ -23,28 +19,33 @@ void pixeltoimage(t_map *mapdata, void *mlx)
         {
             if (mapdata->copymap[j][i] == '0')
             {
-                img = mlx_xpm_file_to_image(mlx, "./textures/floor.xpm", &img_width, &img_height);
-                mlx_put_image_to_window(mlx, mlx_win, img, x*30, y*30);
+                printf("0\n");
+                img = mlx_xpm_file_to_image(img->mlx, "./textures/floor.xpm", &img->img_width, &img->img_height);
+                mlx_put_image_to_window(img->mlx, img->win, img->img, x*65, y*65);
             }
             if (mapdata->copymap[j][i] == '1')
             {
-                img = mlx_xpm_file_to_image(mlx, "./textures/wall.xpm", &img_width, &img_height);
-                mlx_put_image_to_window(mlx, mlx_win, img, x*30, y*30);
+                img = mlx_xpm_file_to_image(img->mlx, "./textures/wall.xpm", &img->img_width, &img->img_height);
+                printf("1\n");
+                mlx_put_image_to_window(img->mlx, img->win, img->img, x*65, y*65);
             }            
             if (mapdata->copymap[j][i] == 'E')
             {
-                img = mlx_xpm_file_to_image(mlx, "./textures/exit.xpm", &img_width, &img_height);
-                mlx_put_image_to_window(mlx, mlx_win, img, x*30, y*30);
+                printf("e\n");
+                img = mlx_xpm_file_to_image(img->mlx, "./textures/exit.xpm", &img->img_width, &img->img_height);
+                mlx_put_image_to_window(img->mlx, img->win, img->img, x*65, y*65);
             }            
             if (mapdata->copymap[j][i] == 'C')
             {
-                img = mlx_xpm_file_to_image(mlx, "./textures/colle.xpm", &img_width, &img_height);
-                mlx_put_image_to_window(mlx, mlx_win, img, x*30, y*30);
+                printf("c\n");
+                img = mlx_xpm_file_to_image(img->mlx, "./textures/star.xpm", &img->img_width, &img->img_height);
+                mlx_put_image_to_window(img->mlx, img->win, img->img, x*65, y*65);
             }
             if (mapdata->copymap[j][i] == 'P')
             {
-                img = mlx_xpm_file_to_image(mlx, "./textures/plyr.xpm", &img_width, &img_height);
-                mlx_put_image_to_window(mlx, mlx_win, img, x*30, y*30);
+                printf("p\n");
+                img = mlx_xpm_file_to_image(img->mlx, "./textures/plyr.xpm", &img->img_width, &img->img_height);
+                mlx_put_image_to_window(img->mlx, img->win, img->img, x*65, y*65);
             }
             x++;
             i++;
@@ -54,12 +55,12 @@ void pixeltoimage(t_map *mapdata, void *mlx)
     }
 }
 
-int moveplyr(t_map *mapdata, int keycode)
+int moveplyr(t_map *mapdata, t_img *img)
 {
     ft_lookforP(mapdata, mapdata->copymap);
     printf("%d\n", mapdata->x);
     printf("%d\n", mapdata->y);
-    if(keycode == keyD || keycode == keyright)
+    if(img->keycode == keyD || img->keycode == keyright)
     {
         if (mapdata->copymap[mapdata->y][mapdata->x+1] != '1')
         {
@@ -67,7 +68,7 @@ int moveplyr(t_map *mapdata, int keycode)
             mapdata->copymap[mapdata->y][mapdata->x + 1] = 'P';
         }
     }
-    if(keycode == keyA || keycode == keyleft)
+    if(img->keycode == keyA || img->keycode == keyleft)
     {
         if (mapdata->copymap[mapdata->y][mapdata->x-1] != '1')
         {
@@ -75,7 +76,7 @@ int moveplyr(t_map *mapdata, int keycode)
             mapdata->copymap[mapdata->y][mapdata->x-1] = 'P';
         }
     }
-    if(keycode == keyS || keycode == keydown)
+    if(img->keycode == keyS || img->keycode == keydown)
     {
         if (mapdata->copymap[mapdata->y+1][mapdata->x] != '1')
         {
@@ -83,7 +84,7 @@ int moveplyr(t_map *mapdata, int keycode)
             mapdata->copymap[mapdata->y+1][mapdata->x] = 'P';
         }
     }
-    if(keycode == keyW || keycode == keyup)
+    if(img->keycode == keyW || img->keycode == keyup)
     {
         if (mapdata->copymap[mapdata->y-1][mapdata->x] != '1')
         {

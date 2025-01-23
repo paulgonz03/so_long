@@ -43,10 +43,14 @@ typedef struct s_map
     char **copymap;
 } t_map;
 
-typedef struct	s_vars {
+typedef struct	s_img {
 	void	*mlx;
 	void	*win;
-} t_vars;
+    void	*img;
+    int     keycode;
+	int		img_width;
+	int		img_height;
+} t_img;
 
 
 
@@ -68,7 +72,7 @@ void printmap(char **map);
 int cheakprintmap(t_map *mapdata);
 void copymap(t_map *mapdata, t_readmap *readdata);
 int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
-void pixeltoimage(t_map *mapdata, void *mlx);
-int moveplyr(t_map *mapdata, int keycode);
+void pixeltoimage(t_map *mapdata, t_img *img);
+int moveplyr(t_map *mapdata, t_img *img);
 
 #endif

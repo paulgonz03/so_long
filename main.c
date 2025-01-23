@@ -6,12 +6,13 @@ int main(int argc,char **argv)
     int i;
     t_map mapdata;
     t_readmap readdata;
+    t_img img;
 
     i = 0;
     if (argc != 2)
         return (1);
     while (argv[1][i] != '\0')
-        i++; 
+        i++;
     bzero(&mapdata, sizeof(mapdata));
     bzero(&readdata, sizeof(readdata));
     if (i > 4 && argv[1][i - 4] == '.' && argv[1][i - 3] == 'b' &&  argv[1][i - 2] == 'e' && argv[1][i - 1] == 'r')
@@ -35,11 +36,10 @@ int main(int argc,char **argv)
     //     return(printf("no hay .ber\n"), 1);
     
 
-	void	*mlx;
-    int keycode = 0;
+	img.mlx = mlx_init();
 
-	mlx = mlx_init();
-    pixeltoimage(&mapdata, mlx);
-    moveplyr(&mapdata, keycode);
-    mlx_loop(mlx);
+    pixeltoimage(&mapdata, &img);
+    moveplyr(&mapdata, &img);
+    // mlx_loop_hook(mapdata.copymap, img.win);
+    mlx_loop(img.mlx);
 }
