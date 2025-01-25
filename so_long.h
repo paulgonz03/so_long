@@ -13,16 +13,32 @@
 #  define BUFFER_SIZE 42
 # endif
 
-#define keyA 97
-#define keyS 115
-#define keyD 100
-#define keyW 119
-#define keyup 65362
-#define keyright 65363
-#define keydown 65364
-#define keyleft 65361
-#define keyESC 65307
+#define KEYA 97
+#define KEYS 115
+#define KEYD 100
+#define KEYW 119
+#define KEYUP 65362
+#define KEYRIGHT 65363
+#define KEYDOWN 65364
+#define KEYLEFT 65361
+#define KEYESC 65307
 
+#define TEXTURE_SIZE 65
+
+#define FLOOR_TEXTURE "./textures/floor.xpm"
+#define WALL_TEXTURE "./textures/wall.xpm"
+#define EXIT_TEXTURE "./textures/exit.xpm"
+#define STAR_TEXTURE "./textures/star.xpm"
+#define PLYR_TEXTURE "./textures/plyr.xpm"
+
+enum {
+    FLOOR = 0,
+    WALL,
+    EXIT,
+    STAR,
+    PLYR,
+    TOTAL
+};
 
 typedef struct s_readmap
 {
@@ -50,8 +66,14 @@ typedef struct	s_img {
     int     keycode;
 	int		img_width;
 	int		img_height;
+    int y;
+    int x;
+    int i;
+    int j;
+    void   *imgs[TOTAL];
+    int lookx;
+    int looky;
 } t_img;
-
 
 
 char	*get_next_line(int fd);
@@ -74,5 +96,7 @@ void copymap(t_map *mapdata, t_readmap *readdata);
 int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
 void pixeltoimage(t_map *mapdata, t_img *img);
 int moveplyr(t_map *mapdata, t_img *img);
+int saveimg(t_img *img);
+void ft_lookP(char **copymap, t_img *img);
 
 #endif

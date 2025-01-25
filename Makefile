@@ -20,7 +20,7 @@ $(NAME): $(OBJ) $(MLX)
 $(MLX):
 	$(MAKE) -C $(MLX_PATH)
 
-%.o: %.c
+%.o: %.c so_long.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -32,5 +32,9 @@ fclean: clean
 	$(MAKE) -C $(MLX_PATH) clean
 
 re: fclean all
+
+r: run
+run: all
+	@./$(NAME) mapa/map1.ber
 
 .PHONY: all clean fclean re

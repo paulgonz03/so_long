@@ -15,6 +15,7 @@ int main(int argc,char **argv)
         i++;
     bzero(&mapdata, sizeof(mapdata));
     bzero(&readdata, sizeof(readdata));
+    bzero(&img, sizeof(img));
     if (i > 4 && argv[1][i - 4] == '.' && argv[1][i - 3] == 'b' &&  argv[1][i - 2] == 'e' && argv[1][i - 1] == 'r')
     {
         mapdata.mape = ft_readmap(argv, &readdata);
@@ -38,8 +39,11 @@ int main(int argc,char **argv)
 
 	img.mlx = mlx_init();
 
+    if (saveimg(&img) == 1)
+        return(printf("error de saveimg\n"), 1);
+    img.win = mlx_new_window(img.mlx, (strlen(mapdata.copymap[0]) -1)*TEXTURE_SIZE, readdata.lines*TEXTURE_SIZE, "so_long paula");
     pixeltoimage(&mapdata, &img);
-    moveplyr(&mapdata, &img);
-    // mlx_loop_hook(mapdata.copymap, img.win);
+    ft_lookP(mapdata.copymap, &img);
+    mlx_key_hook(img.win, moveplyr, &img);
     mlx_loop(img.mlx);
 }
