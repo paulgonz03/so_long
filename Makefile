@@ -10,7 +10,7 @@ SRC = \
 
 OBJ = $(SRC:%.c=%.o)
 
-CFLAGS = -Wall -Wextra -Werror -I/usr/include -I$(MLX_PATH)
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 -I/usr/include -I$(MLX_PATH)
 
 all: $(NAME)
 

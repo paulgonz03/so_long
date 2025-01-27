@@ -14,28 +14,25 @@ int saveimg(t_img *img)
 }
 void pixeltoimage(t_map *mapdata, t_img *img) 
 {
-    img->j = 0;
-    while (mapdata->copymap[img->j])
+    img->y = 0;
+    while (mapdata->copymap[img->y])
     {
-        img->i = 0;
         img->x = 0;
-        while (mapdata->copymap[img->j][img->i]  && mapdata->copymap[img->j][img->i] != '\n')
+        while (mapdata->copymap[img->y][img->x]  && mapdata->copymap[img->y][img->x] != '\n')
         {
-            if (mapdata->copymap[img->j][img->i] == '0')
+            if (mapdata->copymap[img->y][img->x] == '0')
                 mlx_put_image_to_window(img->mlx, img->win, img->imgs[FLOOR], img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[img->j][img->i] == '1')
+            if (mapdata->copymap[img->y][img->x] == '1')
                 mlx_put_image_to_window(img->mlx, img->win, img->imgs[WALL], img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);          
-            if (mapdata->copymap[img->j][img->i] == 'E')
+            if (mapdata->copymap[img->y][img->x] == 'E')
                 mlx_put_image_to_window(img->mlx, img->win, img->imgs[EXIT] , img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[img->j][img->i] == 'C')
+            if (mapdata->copymap[img->y][img->x] == 'C')
                 mlx_put_image_to_window(img->mlx, img->win, img->imgs[STAR], img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[img->j][img->i] == 'P')
-                mlx_put_image_to_window(img->mlx, img->win, img->imgs[PLYR] , img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
+            if (mapdata->copymap[img->y][img->x] == 'P')
+                mlx_put_image_to_window(img->mlx, img->win, img->imgs[PLYR] , img->x*TEXTURE_SIZE + 15, img->y*TEXTURE_SIZE);
             img->x++;
-            img->i++;
         }
         img->y++;
-        img->j++;
     }
 }
 
@@ -52,6 +49,11 @@ void ft_lookP(char **copymap, t_img *img)
         img->lookx = 0;
         img->looky++;
     }
+}
+int closewin(t_img *img)
+{
+    mlx_destroy_window(img->mlx, img->win);
+    exit(EXIT_SUCCESS);
 }
 
 

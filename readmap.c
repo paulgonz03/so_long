@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-char **ft_readmap(char **argv, t_readmap *readdata)
+char **ft_readmap(char **argv, t_map *mapdata)
 {
     int fd;
     int i;
@@ -10,36 +10,36 @@ char **ft_readmap(char **argv, t_readmap *readdata)
     fd = open(argv[1], O_RDONLY);
     if (fd < 0)
         return (NULL);
-    readdata->temp = get_next_line(fd);
-    while (readdata->temp != NULL)
+    mapdata->readdata->temp = get_next_line(fd);
+    while (mapdata->readdata->temp != NULL)
     {
-        free(readdata->temp);
-        readdata->temp = get_next_line(fd);
-        readdata->lines++;
+        free(mapdata->readdata->temp);
+        mapdata->readdata->temp = get_next_line(fd);
+        mapdata->readdata->lines++;
     }
     close (fd);
-    readdata->map = calloc ((readdata->lines + 1), sizeof(char *));
-    if(!readdata->map)
+    mapdata->readdata->map = calloc ((mapdata->readdata->lines + 1), sizeof(char *));
+    if(!mapdata->readdata->map)
         return(NULL);
     fd = open(argv[1], O_RDONLY);
     if (fd < 0)
         return (NULL);
-    readdata->map[i] = get_next_line(fd);
-    while (readdata->map[i++] != NULL)
+    mapdata->readdata->map[i] = get_next_line(fd);
+    while (mapdata->readdata->map[i++] != NULL)
     {
-        readdata->map[i] = get_next_line(fd);
-        if (readdata->map[i] == NULL)
+        mapdata->readdata->map[i] = get_next_line(fd);
+        if (mapdata->readdata->map[i] == NULL)
             break;
-        if (readdata->map[i][0] == '\n')
+        if (mapdata->readdata->map[i][0] == '\n')
         {
             f = 0;
-            while (f <= readdata->lines)
-                free (readdata->map[f++]);
-            free (readdata->map);
+            while (f <= mapdata->readdata->lines)
+                free (mapdata->readdata->map[f++]);
+            free (mapdata->readdata->map);
             return (NULL);
         }
     }
-    return (readdata->map);
+    return (mapdata->readdata->map);
 }
 
 void printmap(char **map)

@@ -3,6 +3,7 @@
 
 int moveplyr(int keycode, t_map *mapdata)
 {
+
     if(keycode == KEYD || keycode == KEYRIGHT)
         moveright(mapdata);
     if(keycode == KEYA || keycode == KEYLEFT)
@@ -11,7 +12,9 @@ int moveplyr(int keycode, t_map *mapdata)
         movedown(mapdata);
     if(keycode == KEYW || keycode == KEYUP)
         moveup(mapdata);
-    printmap(mapdata->copymap);
+    if (keycode == KEYESC)
+        closewin(mapdata->img);
+    pixeltoimage(mapdata, mapdata->img);
     return(0);
 }
 
@@ -34,6 +37,8 @@ void moveup(t_map *mapdata)
         mapdata->copymap[mapdata->img->looky-1][mapdata->img->lookx] = 'P';
     }
     mapdata->img->looky--;
+    printf("%d\n", mapdata->img->countmoves);
+    mapdata->img->countmoves++;
     return ;
 }
 void movedown(t_map *mapdata)
@@ -55,6 +60,8 @@ void movedown(t_map *mapdata)
         mapdata->copymap[mapdata->img->looky+1][mapdata->img->lookx] = 'P';
     }
     mapdata->img->looky++;
+    printf("%d\n", mapdata->img->countmoves);
+    mapdata->img->countmoves++;
     return ;
 }
 void moveright(t_map *mapdata)
@@ -76,6 +83,8 @@ void moveright(t_map *mapdata)
         mapdata->copymap[mapdata->img->looky][mapdata->img->lookx + 1] = 'P';
     }
     mapdata->img->lookx++;
+    printf("%d\n", mapdata->img->countmoves);
+    mapdata->img->countmoves++;
     return ;
 }
 void moveleft(t_map *mapdata)
@@ -97,5 +106,7 @@ void moveleft(t_map *mapdata)
         mapdata->copymap[mapdata->img->looky][mapdata->img->lookx-1] = 'P';
     }
     mapdata->img->lookx--;
+    printf("%d\n", mapdata->img->countmoves);
+    mapdata->img->countmoves++;
     return ;
 }

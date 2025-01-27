@@ -1,4 +1,27 @@
 #include "so_long.h"
+int checkallmap(char **argv, t_map *mapdata, int i)
+{
+    if (i > 4 && argv[1][i - 4] == '.' && argv[1][i - 3] == 'b' &&  argv[1][i - 2] == 'e' && argv[1][i - 1] == 'r')
+    {
+        mapdata->mape = ft_readmap(argv, mapdata);
+        if (mapdata->mape == NULL)
+            return (printf("salto de linea o vacio\n"), 1);
+        if (ft_checkmap(mapdata) == 1)
+            return(printf("error de cheakmap\n"), 1);//if ft_checkmap == 1 beacause if the map is not valid its gonna give you leaks
+        if (ft_cheakmatrix(mapdata, mapdata->readdata->lines) == 1)
+            return(printf("error de cheakmatrix\n"), 1);
+        if (ft_cheakwalls(mapdata, mapdata->readdata) == 1)
+            return(printf("error de cheakwalls\n"), 1);
+        ft_lookforP(mapdata, mapdata->mape);
+        copymap(mapdata, mapdata->readdata);
+        ft_flood_fill(mapdata, mapdata->x, mapdata->y);
+        if (cheakprintmap(mapdata) == 1)
+            return(printf("error de cheakprintmap"), 1);
+    }
+    else
+        return(printf("no hay .ber\n"), 1);
+    return(0);
+}   
 
 int ft_checkmap(t_map *mapdata)
 {

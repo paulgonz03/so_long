@@ -22,8 +22,9 @@
 #define KEYDOWN 65364
 #define KEYLEFT 65361
 #define KEYESC 65307
+#define CLOSEWIN 17
 
-#define TEXTURE_SIZE 65
+#define TEXTURE_SIZE 60
 
 #define FLOOR_TEXTURE "./textures/floor.xpm"
 #define WALL_TEXTURE "./textures/wall.xpm"
@@ -40,13 +41,6 @@ enum {
     TOTAL
 };
 
-typedef struct s_readmap
-{
-    int lines;
-    char *temp;
-    char **map;
-} t_readmap;
-
 typedef struct	s_img {
 	void	*mlx;
 	void	*win;
@@ -61,7 +55,16 @@ typedef struct	s_img {
     void   *imgs[TOTAL];
     int lookx;
     int looky;
+    int countmoves;
 } t_img;
+
+typedef struct s_readmap
+{
+    int lines;
+    char *temp;
+    char **map;
+} t_readmap;
+
 
 typedef struct s_map
 {
@@ -72,6 +75,7 @@ typedef struct s_map
     int x;
     int y;
     char **copymap;
+    t_readmap *readdata;
     t_img *img;
 } t_map;
 
@@ -84,7 +88,7 @@ int		mystrlen(char *str);
 char	*mystrjoin(char *statica, char *aux_read);
 char	*get_read(int fd, char *statica);
 char	*aux_get_read(int fd, char *statica, char *aux_read);
-char **ft_readmap(char **argv, t_readmap *readmap);
+char **ft_readmap(char **argv, t_map *mapdata);
 int main(int argc,char **argv);
 int ft_checkmap(t_map *mapdata);
 int	mystrchr(const char *src, int c);
@@ -103,6 +107,7 @@ void moveup(t_map *mapdata);
 void movedown(t_map *mapdata);
 void moveright(t_map *mapdata);
 void moveleft(t_map *mapdata);
-
+int checkallmap(char **argv, t_map *mapdata, int i);
+int closewin(t_img *img);
 
 #endif
