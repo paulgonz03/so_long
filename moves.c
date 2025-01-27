@@ -53,42 +53,6 @@ void ft_lookP(char **copymap, t_img *img)
         img->looky++;
     }
 }
-int moveplyr(t_map *mapdata, t_img *img)
-{
-    if(img->keycode == KEYD || img->keycode == KEYRIGHT)
-    {
-        if (mapdata->copymap[img->looky][img->lookx+1] != '1')
-        {
-            mapdata->copymap[img->looky][img->lookx] = '0';
-            mapdata->copymap[img->looky][img->lookx + 1] = 'P';
-        }
-    }
-    if(img->keycode == KEYA || img->keycode == KEYLEFT)
-    {
-        if (mapdata->copymap[img->looky][img->lookx-1] != '1')
-        {
-            mapdata->copymap[img->looky][img->lookx] = '0';
-            mapdata->copymap[img->looky][img->lookx-1] = 'P';
-        }
-    }
-    if(img->keycode == KEYS || img->keycode == KEYDOWN)
-    {
-        if (mapdata->copymap[img->looky+1][img->lookx] != '1')
-        {
-            mapdata->copymap[img->looky][img->lookx] = '0';
-            mapdata->copymap[img->looky+1][img->lookx] = 'P';
-        }
-    }
-    if(img->keycode == KEYW || img->keycode == KEYUP)
-    {
-        if (mapdata->copymap[img->looky-1][img->lookx] != '1')
-        {
-            mapdata->copymap[img->looky][img->lookx] = '0';
-            mapdata->copymap[img->looky-1][img->lookx] = 'P';
-        }
-    }
-    printmap(mapdata->copymap);
-    return(0);
-}
+
 
 

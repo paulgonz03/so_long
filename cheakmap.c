@@ -41,9 +41,6 @@ int ft_cheakmatrix(t_map *mapdata, size_t linesnum)
     while (mapdata->mape[y])
     {
         i = strlen(mapdata->mape[y]);
-        // printf("line: %s\n", mapdata->mape[y]);
-        // printf("i: %ld == compare: %ld\n", i, compare);
-        
         if (y == linesnum)
             compare--;
         if (i != compare)

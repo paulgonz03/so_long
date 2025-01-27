@@ -44,6 +44,7 @@ int main(int argc,char **argv)
     img.win = mlx_new_window(img.mlx, (strlen(mapdata.copymap[0]) -1)*TEXTURE_SIZE, readdata.lines*TEXTURE_SIZE, "so_long paula");
     pixeltoimage(&mapdata, &img);
     ft_lookP(mapdata.copymap, &img);
+    printmap(mapdata.copymap);
     mlx_key_hook(img.win, moveplyr, &img);
     mlx_loop(img.mlx);
 }

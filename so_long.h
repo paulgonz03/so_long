@@ -47,18 +47,6 @@ typedef struct s_readmap
     char **map;
 } t_readmap;
 
-typedef struct s_map
-{
-    char **mape;
-    int countP;
-    int countE;
-    int countC;
-    int counterC;
-    int x;
-    int y;
-    char **copymap;
-} t_map;
-
 typedef struct	s_img {
 	void	*mlx;
 	void	*win;
@@ -74,6 +62,19 @@ typedef struct	s_img {
     int lookx;
     int looky;
 } t_img;
+
+typedef struct s_map
+{
+    char **mape;
+    int countP;
+    int countE;
+    int countC;
+    int x;
+    int y;
+    char **copymap;
+    t_img *img;
+} t_map;
+
 
 
 char	*get_next_line(int fd);
@@ -95,8 +96,13 @@ int cheakprintmap(t_map *mapdata);
 void copymap(t_map *mapdata, t_readmap *readdata);
 int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
 void pixeltoimage(t_map *mapdata, t_img *img);
-int moveplyr(t_map *mapdata, t_img *img);
+int moveplyr(int keycode,t_map *mapdata);
 int saveimg(t_img *img);
 void ft_lookP(char **copymap, t_img *img);
+void moveup(t_map *mapdata);
+void movedown(t_map *mapdata);
+void moveright(t_map *mapdata);
+void moveleft(t_map *mapdata);
+
 
 #endif
