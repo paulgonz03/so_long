@@ -99,7 +99,7 @@ void printmap(char **map);
 int cheakprintmap(t_map *mapdata);
 void copymap(t_map *mapdata, t_readmap *readdata);
 int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
-void pixeltoimage(t_map *mapdata, t_img *img);
+void pixeltoimage(t_map *mapdata);
 int moveplyr(int keycode,t_map *mapdata);
 int saveimg(t_img *img);
 void ft_lookP(char **copymap, t_img *img);
@@ -109,5 +109,6 @@ void moveright(t_map *mapdata);
 void moveleft(t_map *mapdata);
 int checkallmap(char **argv, t_map *mapdata, int i);
 int closewin(t_img *img);
+int moves (t_map *mapdata);
 
 #endif

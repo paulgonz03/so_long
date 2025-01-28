@@ -14,7 +14,7 @@ int moveplyr(int keycode, t_map *mapdata)
         moveup(mapdata);
     if (keycode == KEYESC)
         closewin(mapdata->img);
-    pixeltoimage(mapdata, mapdata->img);
+    pixeltoimage(mapdata);
     return(0);
 }
 

@@ -1,6 +1,21 @@
 #include "so_long.h"
 #include  "minilibx-linux/mlx.h"
 
+int moves (t_map *mapdata)
+{
+    mapdata->img->countmoves = 1;
+    mapdata->img->mlx = mlx_init();
+    if (saveimg(mapdata->img) == 1)
+        return(printf("error de saveimg\n"), 1);
+    mapdata->img->win = mlx_new_window(mapdata->img->mlx, (strlen(mapdata->copymap[0]) -1)*TEXTURE_SIZE,  mapdata->readdata->lines*TEXTURE_SIZE, "so_long paula");
+    pixeltoimage(mapdata);
+    ft_lookP(mapdata->copymap, mapdata->img);
+    mlx_hook(mapdata->img->win, CLOSEWIN, 0, closewin, mapdata->img);
+    mlx_key_hook(mapdata->img->win, moveplyr, &mapdata);
+    mlx_loop(mapdata->img->mlx);
+    return(0);
+}
+
 int saveimg(t_img *img)
 {
     img->imgs[FLOOR] = mlx_xpm_file_to_image(img->mlx, FLOOR_TEXTURE, &img->img_width, &img->img_height);
@@ -12,27 +27,27 @@ int saveimg(t_img *img)
         return(1);
     return(0);
 }
-void pixeltoimage(t_map *mapdata, t_img *img) 
+void pixeltoimage(t_map *mapdata) 
 {
-    img->y = 0;
-    while (mapdata->copymap[img->y])
+    mapdata->img->y = 0;
+    while (mapdata->copymap[mapdata->img->y])
     {
-        img->x = 0;
-        while (mapdata->copymap[img->y][img->x]  && mapdata->copymap[img->y][img->x] != '\n')
+        mapdata->img->x = 0;
+        while (mapdata->copymap[mapdata->img->y][mapdata->img->x]  && mapdata->copymap[mapdata->img->y][mapdata->img->x] != '\n')
         {
-            if (mapdata->copymap[img->y][img->x] == '0')
-                mlx_put_image_to_window(img->mlx, img->win, img->imgs[FLOOR], img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[img->y][img->x] == '1')
-                mlx_put_image_to_window(img->mlx, img->win, img->imgs[WALL], img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);          
-            if (mapdata->copymap[img->y][img->x] == 'E')
-                mlx_put_image_to_window(img->mlx, img->win, img->imgs[EXIT] , img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[img->y][img->x] == 'C')
-                mlx_put_image_to_window(img->mlx, img->win, img->imgs[STAR], img->x*TEXTURE_SIZE, img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[img->y][img->x] == 'P')
-                mlx_put_image_to_window(img->mlx, img->win, img->imgs[PLYR] , img->x*TEXTURE_SIZE + 15, img->y*TEXTURE_SIZE);
-            img->x++;
+            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == '0')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[FLOOR], mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);
+            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == '1')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[WALL], mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);          
+            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == 'E')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[EXIT] , mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);
+            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == 'C')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[STAR], mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);
+            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == 'P')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[PLYR] , mapdata->img->x*TEXTURE_SIZE + 15, mapdata->img->y*TEXTURE_SIZE);
+            mapdata->img->x++;
         }
-        img->y++;
+        mapdata->img->y++;
     }
 }
 
