@@ -1,4 +1,5 @@
 #include "so_long.h"
+
 int checkallmap(char **argv, t_map *mapdata, int i)
 {
     if (i > 4 && argv[1][i - 4] == '.' && argv[1][i - 3] == 'b' &&  argv[1][i - 2] == 'e' && argv[1][i - 1] == 'r')
@@ -7,16 +8,16 @@ int checkallmap(char **argv, t_map *mapdata, int i)
         if (mapdata->mape == NULL)
             return (printf("salto de linea o vacio\n"), 1);
         if (ft_checkmap(mapdata) == 1)
-            return(printf("error de cheakmap\n"), 1);//if ft_checkmap == 1 beacause if the map is not valid its gonna give you leaks
+            return(ft_free(mapdata), printf("error de cheakmap\n"), 1);
         if (ft_cheakmatrix(mapdata, mapdata->readdata->lines) == 1)
-            return(printf("error de cheakmatrix\n"), 1);
+            return(ft_free(mapdata), printf("error de cheakmatrix\n"), 1);
         if (ft_cheakwalls(mapdata, mapdata->readdata) == 1)
-            return(printf("error de cheakwalls\n"), 1);
+            return(ft_free(mapdata), printf("error de cheakwalls\n"), 1);
         ft_lookforP(mapdata, mapdata->mape);
         copymap(mapdata, mapdata->readdata);
         ft_flood_fill(mapdata, mapdata->x, mapdata->y);
         if (cheakprintmap(mapdata) == 1)
-            return(printf("error de cheakprintmap"), 1);
+            return(ft_free(mapdata), printf("error de cheakprintmap"), 1);
     }
     else
         return(printf("no hay .ber\n"), 1);
@@ -81,8 +82,7 @@ int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
 
     i = 0;
     j = 0;
-    auxlines = readdata->lines;
-    auxlines--;
+    auxlines = readdata->lines -1;
     lastcolum = strlen(mapdata->mape[auxlines]) - 1;
     while (mapdata->mape[j++][i] && j <= auxlines)
         if (mapdata->mape[j][i] && mapdata->mape[j][i] != '\n' &&mapdata->mape[j][i] != '1')
@@ -100,58 +100,4 @@ int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
         if (mapdata->mape[j][i] && mapdata->mape[j][i] != '\n' && mapdata->mape[auxlines][i] != '1')
             return (printf("muro abajo\n"), 1);
     return(0);
-}
-
-
-void ft_lookforP(t_map *mapdata, char **mape)
-{
-    while (mape[mapdata->y])
-    {
-        while (mape[mapdata->y][mapdata->x])
-        {
-            if (mape[mapdata->y][mapdata->x] == 'P')
-                return ;
-            mapdata->x++;
-        }
-        mapdata->x = 0;
-        mapdata->y++;
-    }
-}
-
-void ft_flood_fill(t_map *mapdata, int x, int y)
-{   
-    if (mapdata->mape[y][x] == 'x' || mapdata->mape[y][x] == '1')
-        return ;
-    mapdata->mape[y][x] = 'x';
-    ft_flood_fill(mapdata, x, y+1);
-    ft_flood_fill(mapdata, x, y-1);
-    ft_flood_fill(mapdata, x+1, y);
-    ft_flood_fill(mapdata, x-1, y);
-}
-
-int cheakprintmap(t_map *mapdata)
-{
-    int i;
-    int j;
-
-    i = -1;
-    while (mapdata->mape[++i])
-    {
-        j = 0;
-        while (mapdata->mape[i][j] != '\0')
-        {
-            if (mapdata->mape[i][j] == 'P')
-                return(1);
-            else if (mapdata->mape[i][j] == 'E')
-                return(1);
-            else if (mapdata->mape[i][j] == 'C')
-                return(1);
-            else if (mapdata->mape[i][j] == '0')
-                return (1);
-            else if (mapdata->mape[i][j] == 'x' || mapdata->mape[i][j] == '1' || mapdata->mape[i][j] == '\n')
-                i=i;
-            j++;
-        }
-    }
-    return (0);
 }

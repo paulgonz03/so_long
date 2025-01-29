@@ -6,7 +6,7 @@ MLX = $(MLX_PATH)/libmlx.a
 CC = cc
 
 SRC = \
-	cheakmap.c get_next_line_nuevo.c get_next_line_utils_nuevo.c main.c moves.c readmap.c moveplyr.c\
+	cheakmap.c get_next_line_nuevo.c get_next_line_utils_nuevo.c main.c moves.c readmap.c moveplyr.c floodfill.c\
 
 OBJ = $(SRC:%.c=%.o)
 

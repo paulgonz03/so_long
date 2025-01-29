@@ -3,7 +3,6 @@
 
 int moves (t_map *mapdata)
 {
-    printmap(mapdata->copymap); 
     mapdata->img->countmoves = 1;
     mapdata->img->mlx = mlx_init();
     if (saveimg(mapdata->img) == 1)
@@ -12,7 +11,7 @@ int moves (t_map *mapdata)
     pixeltoimage(mapdata);
     ft_lookP(mapdata);
     mlx_hook(mapdata->img->win, CLOSEWIN, 0, closewin, mapdata->img);
-    mlx_key_hook(mapdata->img->win, moveplyr, &mapdata);
+    mlx_key_hook(mapdata->img->win, moveplyr, mapdata);
     mlx_loop(mapdata->img->mlx);
     return(0);
 }
@@ -28,10 +27,10 @@ int saveimg(t_img *img)
         return(1);
     return(0);
 }
+
 void pixeltoimage(t_map *mapdata) 
 {
     mapdata->img->j = 0;
-    // printf("%d\n", mapdata->img->y);
     while (mapdata->copymap[mapdata->img->j])
     {
         mapdata->img->i = 0;
@@ -68,11 +67,9 @@ void ft_lookP(t_map *mapdata)
     }
     printf("%d\n", mapdata->img->findy);
 }
+
 int closewin(t_img *img)
 {
     mlx_destroy_window(img->mlx, img->win);
     exit(EXIT_SUCCESS);
 }
-
-
-

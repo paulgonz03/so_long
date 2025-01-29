@@ -108,5 +108,7 @@ void moveleft(t_map *mapdata);
 int checkallmap(char **argv, t_map *mapdata, int i);
 int closewin(t_img *img);
 int moves (t_map *mapdata);
+void ft_free(t_map *mapdata);
+char **ft_auxreadmapa(t_map *mapdata, char **argv, int fd, int f);
 
 #endif

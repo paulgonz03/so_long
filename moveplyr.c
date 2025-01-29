@@ -20,7 +20,6 @@ int moveplyr(int keycode, t_map *mapdata)
 
 void moveup(t_map *mapdata)
 {
-    printf("%d\n", mapdata->img->findy);
     if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] == '1')
         return ;
     if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] != '1')
@@ -42,6 +41,7 @@ void moveup(t_map *mapdata)
     mapdata->img->countmoves++;
     return ;
 }
+
 void movedown(t_map *mapdata)
 {
     if (mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] == '1')
@@ -65,6 +65,7 @@ void movedown(t_map *mapdata)
     mapdata->img->countmoves++;
     return ;
 }
+
 void moveright(t_map *mapdata)
 {
     if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] == '1')
@@ -88,6 +89,7 @@ void moveright(t_map *mapdata)
     mapdata->img->countmoves++;
     return ;
 }
+
 void moveleft(t_map *mapdata)
 {
     if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] == '1')

@@ -3,10 +3,9 @@
 char **ft_readmap(char **argv, t_map *mapdata)
 {
     int fd;
-    int i;
     int f;
 
-    i = 0;
+    f = 0;
     fd = open(argv[1], O_RDONLY);
     if (fd < 0)
         return (NULL);
@@ -18,6 +17,15 @@ char **ft_readmap(char **argv, t_map *mapdata)
         mapdata->readdata->lines++;
     }
     close (fd);
+    mapdata->readdata->map =ft_auxreadmapa(mapdata, argv, fd, f);
+    return(mapdata->readdata->map);
+}
+
+char **ft_auxreadmapa(t_map *mapdata, char **argv, int fd, int f)
+{
+    int i;
+
+    i = 0;
     mapdata->readdata->map = calloc ((mapdata->readdata->lines + 1), sizeof(char *));
     if(!mapdata->readdata->map)
         return(NULL);
@@ -42,26 +50,26 @@ char **ft_readmap(char **argv, t_map *mapdata)
     return (mapdata->readdata->map);
 }
 
-void printmap(char **map)
-{
-    int x;
-    int y;
+// void printmap(char **map)
+// {
+//     int x;
+//     int y;
 
-    x = 0;
-    y = 0;
-    while (map[y])
-    {
-        while (map[y][x])
-        {
-            printf("%c", map[y][x]);
-            x++;
-        }
-        x = 0;
-        y++;
-    }
-    printf("\n");
-    return ;
-}
+//     x = 0;
+//     y = 0;
+//     while (map[y])
+//     {
+//         while (map[y][x])
+//         {
+//             printf("%c", map[y][x]);
+//             x++;
+//         }
+//         x = 0;
+//         y++;
+//     }
+//     printf("\n");
+//     return ;
+// }
 void copymap(t_map *mapdata, t_readmap *readdata)
 {
     int j;
@@ -79,5 +87,33 @@ void copymap(t_map *mapdata, t_readmap *readdata)
        strcpy (mapdata->copymap[j], mapdata->mape[j]);
         j++;
     }
+    return ;
+}
+void ft_lookforP(t_map *mapdata, char **mape)
+{
+    while (mape[mapdata->y])
+    {
+        while (mape[mapdata->y][mapdata->x])
+        {
+            if (mape[mapdata->y][mapdata->x] == 'P')
+                return ;
+            mapdata->x++;
+        }
+        mapdata->x = 0;
+        mapdata->y++;
+    }
+}
+
+void ft_free(t_map *mapdata)
+{
+    int j;
+
+    j = 0;
+    while (mapdata->mape[j])
+    {
+        free(mapdata->mape[j]);
+        j++;
+    }
+    free(mapdata->mape);
     return ;
 }
