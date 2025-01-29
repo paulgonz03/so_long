@@ -20,92 +20,93 @@ int moveplyr(int keycode, t_map *mapdata)
 
 void moveup(t_map *mapdata)
 {
-    if (mapdata->copymap[mapdata->img->looky-1][mapdata->img->lookx] == '1')
+    printf("%d\n", mapdata->img->findy);
+    if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] == '1')
         return ;
-    if (mapdata->copymap[mapdata->img->looky-1][mapdata->img->lookx] != '1')
+    if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] != '1')
     {
-        if (mapdata->copymap[mapdata->img->looky-1][mapdata->img->lookx] == 'E')
+        if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] == 'E')
         {
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
                 exit(EXIT_SUCCESS);
         }
-        if (mapdata->copymap[mapdata->img->looky-1][mapdata->img->lookx] == 'C')
+        if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] == 'C')
             mapdata->countC--;
-        mapdata->copymap[mapdata->img->looky][mapdata->img->lookx] = '0';
-        mapdata->copymap[mapdata->img->looky-1][mapdata->img->lookx] = 'P';
+        mapdata->copymap[mapdata->img->findy][mapdata->img->findx] = '0';
+        mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] = 'P';
     }
-    mapdata->img->looky--;
+    mapdata->img->findy--;
     printf("%d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }
 void movedown(t_map *mapdata)
 {
-    if (mapdata->copymap[mapdata->img->looky+1][mapdata->img->lookx] == '1')
+    if (mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] == '1')
         return ;
-    if (mapdata->copymap[mapdata->img->looky+1][mapdata->img->lookx] != '1')
+    if (mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] != '1')
     {
-        if (mapdata->copymap[mapdata->img->looky+1][mapdata->img->lookx] == 'E')
+        if (mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] == 'E')
         {
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
                 exit(EXIT_SUCCESS);
         }
-        if (mapdata->copymap[mapdata->img->looky+1][mapdata->img->lookx] == 'C')
+        if (mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] == 'C')
             mapdata->countC--;
-        mapdata->copymap[mapdata->img->looky][mapdata->img->lookx] = '0';
-        mapdata->copymap[mapdata->img->looky+1][mapdata->img->lookx] = 'P';
+        mapdata->copymap[mapdata->img->findy][mapdata->img->findx] = '0';
+        mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] = 'P';
     }
-    mapdata->img->looky++;
+    mapdata->img->findy++;
     printf("%d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }
 void moveright(t_map *mapdata)
 {
-    if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx + 1] == '1')
+    if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] == '1')
         return ;
-    if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx + 1] != '1')
+    if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] != '1')
     {
-        if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx + 1] == 'E')
+        if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] == 'E')
         {
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
                 exit(EXIT_SUCCESS);
         }
-        if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx + 1] == 'C')
+        if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] == 'C')
             mapdata->countC--;
-        mapdata->copymap[mapdata->img->looky][mapdata->img->lookx] = '0';
-        mapdata->copymap[mapdata->img->looky][mapdata->img->lookx + 1] = 'P';
+        mapdata->copymap[mapdata->img->findy][mapdata->img->findx] = '0';
+        mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] = 'P';
     }
-    mapdata->img->lookx++;
+    mapdata->img->findx++;
     printf("%d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }
 void moveleft(t_map *mapdata)
 {
-    if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx-1] == '1')
+    if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] == '1')
         return ;
-    if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx-1] != '1')
+    if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] != '1')
     {
-        if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx-1] == 'E')
+        if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] == 'E')
         {
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
                 exit(EXIT_SUCCESS);
         }
-        if (mapdata->copymap[mapdata->img->looky][mapdata->img->lookx-1] == 'C')
+        if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] == 'C')
             mapdata->countC--;
-        mapdata->copymap[mapdata->img->looky][mapdata->img->lookx] = '0';
-        mapdata->copymap[mapdata->img->looky][mapdata->img->lookx-1] = 'P';
+        mapdata->copymap[mapdata->img->findy][mapdata->img->findx] = '0';
+        mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] = 'P';
     }
-    mapdata->img->lookx--;
+    mapdata->img->findx--;
     printf("%d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;

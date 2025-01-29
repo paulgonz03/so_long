@@ -3,13 +3,14 @@
 
 int moves (t_map *mapdata)
 {
+    printmap(mapdata->copymap); 
     mapdata->img->countmoves = 1;
     mapdata->img->mlx = mlx_init();
     if (saveimg(mapdata->img) == 1)
         return(printf("error de saveimg\n"), 1);
     mapdata->img->win = mlx_new_window(mapdata->img->mlx, (strlen(mapdata->copymap[0]) -1)*TEXTURE_SIZE,  mapdata->readdata->lines*TEXTURE_SIZE, "so_long paula");
     pixeltoimage(mapdata);
-    ft_lookP(mapdata->copymap, mapdata->img);
+    ft_lookP(mapdata);
     mlx_hook(mapdata->img->win, CLOSEWIN, 0, closewin, mapdata->img);
     mlx_key_hook(mapdata->img->win, moveplyr, &mapdata);
     mlx_loop(mapdata->img->mlx);
@@ -29,41 +30,43 @@ int saveimg(t_img *img)
 }
 void pixeltoimage(t_map *mapdata) 
 {
-    mapdata->img->y = 0;
-    while (mapdata->copymap[mapdata->img->y])
+    mapdata->img->j = 0;
+    // printf("%d\n", mapdata->img->y);
+    while (mapdata->copymap[mapdata->img->j])
     {
-        mapdata->img->x = 0;
-        while (mapdata->copymap[mapdata->img->y][mapdata->img->x]  && mapdata->copymap[mapdata->img->y][mapdata->img->x] != '\n')
+        mapdata->img->i = 0;
+        while (mapdata->copymap[mapdata->img->j][mapdata->img->i]  && mapdata->copymap[mapdata->img->j][mapdata->img->i] != '\n')
         {
-            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == '0')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[FLOOR], mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == '1')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[WALL], mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);          
-            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == 'E')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[EXIT] , mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == 'C')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[STAR], mapdata->img->x*TEXTURE_SIZE, mapdata->img->y*TEXTURE_SIZE);
-            if (mapdata->copymap[mapdata->img->y][mapdata->img->x] == 'P')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[PLYR] , mapdata->img->x*TEXTURE_SIZE + 15, mapdata->img->y*TEXTURE_SIZE);
-            mapdata->img->x++;
+            if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == '0')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[FLOOR], mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);
+            if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == '1')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[WALL], mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);          
+            if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == 'E')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[EXIT] , mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);
+            if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == 'C')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[STAR], mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);
+            if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == 'P')
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[PLYR] , mapdata->img->i*TEXTURE_SIZE + 15, mapdata->img->j*TEXTURE_SIZE);
+            mapdata->img->i++;
         }
-        mapdata->img->y++;
+        mapdata->img->j++;
     }
 }
 
-void ft_lookP(char **copymap, t_img *img)
+void ft_lookP(t_map *mapdata)
 {
-    while (copymap[img->looky])
+    while (mapdata->copymap[mapdata->img->findy])
     {
-        while (copymap[img->looky][img->lookx])
+        mapdata->img->findx = 0;
+        while (mapdata->copymap[mapdata->img->findy][mapdata->img->findx])
         {
-            if (copymap[img->looky][img->lookx] == 'P')
+            if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx] == 'P')
                 return ;
-            img->lookx++;;
+            mapdata->img->findx++;;
         }
-        img->lookx = 0;
-        img->looky++;
+        mapdata->img->findy++;
     }
+    printf("%d\n", mapdata->img->findy);
 }
 int closewin(t_img *img)
 {

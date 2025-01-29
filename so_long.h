@@ -48,13 +48,11 @@ typedef struct	s_img {
     int     keycode;
 	int		img_width;
 	int		img_height;
-    int y;
-    int x;
-    int i;
     int j;
+    int i;
     void   *imgs[TOTAL];
-    int lookx;
-    int looky;
+    int findx;
+    int findy;
     int countmoves;
 } t_img;
 
@@ -75,8 +73,8 @@ typedef struct s_map
     int x;
     int y;
     char **copymap;
-    t_readmap *readdata;
     t_img *img;
+    t_readmap *readdata;
 } t_map;
 
 
@@ -102,7 +100,7 @@ int ft_cheakwalls(t_map *mapdata, t_readmap *readdata);
 void pixeltoimage(t_map *mapdata);
 int moveplyr(int keycode,t_map *mapdata);
 int saveimg(t_img *img);
-void ft_lookP(char **copymap, t_img *img);
+void ft_lookP(t_map *mapdata);
 void moveup(t_map *mapdata);
 void movedown(t_map *mapdata);
 void moveright(t_map *mapdata);
