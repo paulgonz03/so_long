@@ -28,7 +28,7 @@ char **ft_auxreadmapa(t_map *mapdata, char **argv, int fd, int f)
     i = 0;
     mapdata->readdata->map = calloc ((mapdata->readdata->lines + 1), sizeof(char *));
     if(!mapdata->readdata->map)
-        return(NULL);
+        return(free (mapdata->readdata->temp), mapdata->readdata->map);
     fd = open(argv[1], O_RDONLY);
     if (fd < 0)
         return (NULL);
@@ -76,6 +76,8 @@ void copymap(t_map *mapdata, t_readmap *readdata)
 
     j = 0;
     mapdata->copymap = calloc(readdata->lines + 1,  sizeof(char *));
+    if (!mapdata->copymap)
+        return (ft_free (mapdata->mape));
     while (mapdata->mape[j])
     {
         mapdata->copymap[j] = calloc(strlen(mapdata->mape[j]) + 1, sizeof (char));
@@ -104,16 +106,16 @@ void ft_lookforP(t_map *mapdata, char **mape)
     }
 }
 
-void ft_free(t_map *mapdata)
+void ft_free(char **map)
 {
     int j;
 
     j = 0;
-    while (mapdata->mape[j])
+    while (map[j])
     {
-        free(mapdata->mape[j]);
+        free(map[j]);
         j++;
     }
-    free(mapdata->mape);
+    free(map);
     return ;
 }

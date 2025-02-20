@@ -31,7 +31,7 @@ int cheakprintmap(t_map *mapdata)
             else if (mapdata->mape[i][j] == '0')
                 return (1);
             else if (mapdata->mape[i][j] == 'x' || mapdata->mape[i][j] == '1' || mapdata->mape[i][j] == '\n')
-                i=i;
+                i = i;
             j++;
         }
     }

@@ -8,16 +8,16 @@ int checkallmap(char **argv, t_map *mapdata, int i)
         if (mapdata->mape == NULL)
             return (printf("salto de linea o vacio\n"), 1);
         if (ft_checkmap(mapdata) == 1)
-            return(ft_free(mapdata), printf("error de cheakmap\n"), 1);
+            return(ft_free(mapdata->mape), printf("error de cheakmap\n"), 1);
         if (ft_cheakmatrix(mapdata, mapdata->readdata->lines) == 1)
-            return(ft_free(mapdata), printf("error de cheakmatrix\n"), 1);
+            return(ft_free(mapdata->mape), printf("error de cheakmatrix\n"), 1);
         if (ft_cheakwalls(mapdata, mapdata->readdata) == 1)
-            return(ft_free(mapdata), printf("error de cheakwalls\n"), 1);
+            return(ft_free(mapdata->mape), printf("error de cheakwalls\n"), 1);
         ft_lookforP(mapdata, mapdata->mape);
         copymap(mapdata, mapdata->readdata);
         ft_flood_fill(mapdata, mapdata->x, mapdata->y);
         if (cheakprintmap(mapdata) == 1)
-            return(ft_free(mapdata), printf("error de cheakprintmap"), 1);
+            return(ft_free(mapdata->mape), ft_free (mapdata->copymap), printf("error de cheakprintmap"), 1);
     }
     else
         return(printf("no hay .ber\n"), 1);
@@ -42,7 +42,7 @@ int ft_checkmap(t_map *mapdata)
             else if (mapdata->mape[i][j] == 'C')
                 mapdata->countC++;
             else if (mapdata->mape[i][j] == '0' || mapdata->mape[i][j] == '1' || mapdata->mape[i][j] == '\n')
-                i=i;
+                ;
             else
                 return(1);
             j++;

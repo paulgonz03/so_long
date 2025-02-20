@@ -41,11 +41,11 @@ void pixeltoimage(t_map *mapdata)
             if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == '1')
                 mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[WALL], mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);          
             if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == 'E')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[EXIT] , mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[EXIT] , mapdata->img->i*TEXTURE_SIZE + 10, mapdata->img->j*TEXTURE_SIZE);
             if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == 'C')
                 mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[STAR], mapdata->img->i*TEXTURE_SIZE, mapdata->img->j*TEXTURE_SIZE);
             if (mapdata->copymap[mapdata->img->j][mapdata->img->i] == 'P')
-                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[PLYR] , mapdata->img->i*TEXTURE_SIZE + 15, mapdata->img->j*TEXTURE_SIZE);
+                mlx_put_image_to_window(mapdata->img->mlx, mapdata->img->win, mapdata->img->imgs[PLYR] , mapdata->img->i*TEXTURE_SIZE + 2, mapdata->img->j*TEXTURE_SIZE);
             mapdata->img->i++;
         }
         mapdata->img->j++;
