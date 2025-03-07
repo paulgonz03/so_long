@@ -17,7 +17,7 @@ int checkallmap(char **argv, t_map *mapdata, int i)
         copymap(mapdata, mapdata->readdata);
         ft_flood_fill(mapdata, mapdata->x, mapdata->y);
         if (cheakprintmap(mapdata) == 1)
-            return(ft_free(mapdata->mape), ft_free (mapdata->copymap), printf("error de cheakprintmap"), 1);
+            return(ft_free(mapdata->mape), ft_free (mapdata->copymap), printf("error de cheakprintmap\n"), 1);
     }
     else
         return(printf("no hay .ber\n"), 1);

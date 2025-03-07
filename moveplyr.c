@@ -29,7 +29,11 @@ void moveup(t_map *mapdata)
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
+            {
+                printf("Moves: %d\n", mapdata->img->countmoves);
+                printf("you won\n");
                 exit(EXIT_SUCCESS);
+            }
         }
         if (mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] == 'C')
             mapdata->countC--;
@@ -37,7 +41,7 @@ void moveup(t_map *mapdata)
         mapdata->copymap[mapdata->img->findy-1][mapdata->img->findx] = 'P';
     }
     mapdata->img->findy--;
-    printf("%d\n", mapdata->img->countmoves);
+    printf("Moves: %d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }
@@ -53,7 +57,11 @@ void movedown(t_map *mapdata)
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
+            {
+                printf("Moves: %d\n", mapdata->img->countmoves);
+                printf("you won\n");
                 exit(EXIT_SUCCESS);
+            }
         }
         if (mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] == 'C')
             mapdata->countC--;
@@ -61,7 +69,7 @@ void movedown(t_map *mapdata)
         mapdata->copymap[mapdata->img->findy+1][mapdata->img->findx] = 'P';
     }
     mapdata->img->findy++;
-    printf("%d\n", mapdata->img->countmoves);
+    printf("Moves: %d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }
@@ -77,7 +85,11 @@ void moveright(t_map *mapdata)
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
+            {
+                printf("Moves: %d\n", mapdata->img->countmoves);
+                printf("you won\n");
                 exit(EXIT_SUCCESS);
+            }
         }
         if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] == 'C')
             mapdata->countC--;
@@ -85,7 +97,7 @@ void moveright(t_map *mapdata)
         mapdata->copymap[mapdata->img->findy][mapdata->img->findx + 1] = 'P';
     }
     mapdata->img->findx++;
-    printf("%d\n", mapdata->img->countmoves);
+    printf("Moves: %d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }
@@ -101,7 +113,11 @@ void moveleft(t_map *mapdata)
             if (mapdata->countC != 0)
                 return ;
             if (mapdata->countC == 0)
+            {
+                printf("Moves: %d\n", mapdata->img->countmoves);
+                printf("you won\n");
                 exit(EXIT_SUCCESS);
+            }
         }
         if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] == 'C')
             mapdata->countC--;
@@ -109,7 +125,7 @@ void moveleft(t_map *mapdata)
         mapdata->copymap[mapdata->img->findy][mapdata->img->findx-1] = 'P';
     }
     mapdata->img->findx--;
-    printf("%d\n", mapdata->img->countmoves);
+    printf("Moves: %d\n", mapdata->img->countmoves);
     mapdata->img->countmoves++;
     return ;
 }

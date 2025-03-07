@@ -6,7 +6,10 @@ int moves (t_map *mapdata)
     mapdata->img->countmoves = 1;
     mapdata->img->mlx = mlx_init();
     if (saveimg(mapdata->img) == 1)
-        return(printf("error de saveimg\n"), 1);
+    {
+        printf("error de saveimg\n"), 
+        exit(EXIT_FAILURE);
+    }
     mapdata->img->win = mlx_new_window(mapdata->img->mlx, (strlen(mapdata->copymap[0]) -1)*TEXTURE_SIZE,  mapdata->readdata->lines*TEXTURE_SIZE, "so_long paula");
     pixeltoimage(mapdata);
     ft_lookP(mapdata);
