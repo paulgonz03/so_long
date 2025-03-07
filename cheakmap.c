@@ -1,20 +1,26 @@
 #include "so_long.h"
 
-int checkallmap(char **argv, t_map *mapdata, int i)
+int checkallmap(char **argv, t_map *mapdata)
 {
+    int i;
+
+    i = 0;
+    while (argv[1][i] != '\0')
+        i++;
     if (i > 4 && argv[1][i - 4] == '.' && argv[1][i - 3] == 'b' &&  argv[1][i - 2] == 'e' && argv[1][i - 1] == 'r')
     {
-        mapdata->mape = ft_readmap(argv, mapdata);
+        mapdata->mape = readmap(argv, mapdata);
         if (mapdata->mape == NULL)
             return (printf("salto de linea o vacio\n"), 1);
-        if (ft_checkmap(mapdata) == 1)
+        if (checkmap(mapdata) == 1)
             return(ft_free(mapdata->mape), printf("error de cheakmap\n"), 1);
-        if (ft_cheakmatrix(mapdata, mapdata->readdata->lines) == 1)
-            return(ft_free(mapdata->mape), printf("error de cheakmatrix\n"), 1);
-        if (ft_cheakwalls(mapdata, mapdata->readdata) == 1)
-            return(ft_free(mapdata->mape), printf("error de cheakwalls\n"), 1);
-        ft_lookforP(mapdata, mapdata->mape);
-        copymap(mapdata, mapdata->readdata);
+        if (cheakmatrix(mapdata, mapdata->readdata->lines) == 1)
+            return(free(mapdata->mape), printf("error de cheakmatrix\n"), 1);
+        if (cheakwalls(mapdata, mapdata->readdata) == 1)
+            return(free(mapdata->mape), printf("error de cheakwalls\n"), 1);
+        lookforP(mapdata, mapdata->mape);
+        if (copymap(mapdata, mapdata->readdata) == 1)
+            return(printf("error de copymap\n"), 1);
         ft_flood_fill(mapdata, mapdata->x, mapdata->y);
         if (cheakprintmap(mapdata) == 1)
             return(ft_free(mapdata->mape), ft_free (mapdata->copymap), printf("error de cheakprintmap\n"), 1);
@@ -24,7 +30,7 @@ int checkallmap(char **argv, t_map *mapdata, int i)
     return(0);
 }   
 
-int ft_checkmap(t_map *mapdata)
+int checkmap(t_map *mapdata)
 {
     int i;
     int j;
@@ -53,7 +59,7 @@ int ft_checkmap(t_map *mapdata)
     return (0);
 }
 
-int ft_cheakmatrix(t_map *mapdata, size_t linesnum)
+int cheakmatrix(t_map *mapdata, size_t linesnum)
 {
     size_t y;
     int compare;
@@ -68,12 +74,12 @@ int ft_cheakmatrix(t_map *mapdata, size_t linesnum)
         if (y == linesnum)
             compare--;
         if (i != compare)
-                return (1);
+            return (1);
         y++;
     }
     return (0);
 }
-int ft_cheakwalls(t_map *mapdata, t_readmap *readdata)
+int cheakwalls(t_map *mapdata, t_readmap *readdata)
 {
     int i;
     int j;

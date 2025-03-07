@@ -1,7 +1,7 @@
 #include "so_long.h"
 #include  "minilibx-linux/mlx.h"
 
-int moves (t_map *mapdata)
+int moves(t_map *mapdata)
 {
     mapdata->img->countmoves = 1;
     mapdata->img->mlx = mlx_init();
@@ -10,9 +10,8 @@ int moves (t_map *mapdata)
         printf("error de saveimg\n"), 
         exit(EXIT_FAILURE);
     }
-    mapdata->img->win = mlx_new_window(mapdata->img->mlx, (strlen(mapdata->copymap[0]) -1)*TEXTURE_SIZE,  mapdata->readdata->lines*TEXTURE_SIZE, "so_long paula");
+    mapdata->img->win = mlx_new_window(mapdata->img->mlx, (strlen(mapdata->copymap[0]) -1) * TEXTURE_SIZE,  mapdata->readdata->lines * TEXTURE_SIZE, "so_long paula");
     pixeltoimage(mapdata);
-    ft_lookP(mapdata);
     mlx_hook(mapdata->img->win, CLOSEWIN, 0, closewin, mapdata->img);
     mlx_key_hook(mapdata->img->win, moveplyr, mapdata);
     mlx_loop(mapdata->img->mlx);
@@ -53,22 +52,6 @@ void pixeltoimage(t_map *mapdata)
         }
         mapdata->img->j++;
     }
-}
-
-void ft_lookP(t_map *mapdata)
-{
-    while (mapdata->copymap[mapdata->img->findy])
-    {
-        mapdata->img->findx = 0;
-        while (mapdata->copymap[mapdata->img->findy][mapdata->img->findx])
-        {
-            if (mapdata->copymap[mapdata->img->findy][mapdata->img->findx] == 'P')
-                return ;
-            mapdata->img->findx++;;
-        }
-        mapdata->img->findy++;
-    }
-    printf("%d\n", mapdata->img->findy);
 }
 
 int closewin(t_img *img)
