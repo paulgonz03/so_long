@@ -1,4 +1,5 @@
 #include "so_long.h"
+#include "libft/libft.h"
 
 void ft_flood_fill(t_map *mapdata, int x, int y)
 {   

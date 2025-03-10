@@ -1,11 +1,12 @@
 #include "so_long.h"
+#include "libft/libft.h"
 
 char **auxreadmapa(t_map *mapdata, char **argv, int fd, int j)
 {
     int i;
 
     i = 0;
-    mapdata->readdata->map = calloc ((mapdata->readdata->lines + 1), sizeof(char *));
+    mapdata->readdata->map = ft_calloc ((mapdata->readdata->lines + 1), sizeof(char *));
     if(!mapdata->readdata->map)
         return(NULL);
     fd = open(argv[1], O_RDONLY);
@@ -77,12 +78,12 @@ int copymap(t_map *mapdata, t_readmap *readdata)
     int j;
 
     j = 0;
-    mapdata->copymap = calloc(readdata->lines + 1,  sizeof(char *));
+    mapdata->copymap = ft_calloc(readdata->lines + 1,  sizeof(char *));
     if (!mapdata->copymap)
         return (free (mapdata->mape), 1);
     while (mapdata->mape[j])
     {
-        mapdata->copymap[j] = calloc(strlen(mapdata->mape[j]) + 1, sizeof (char));
+        mapdata->copymap[j] = ft_calloc(strlen(mapdata->mape[j]) + 1, sizeof (char));
         if (!mapdata->copymap)
             return (ft_free(mapdata->mape), ft_free(mapdata->copymap), 1);
         j++;
@@ -90,7 +91,7 @@ int copymap(t_map *mapdata, t_readmap *readdata)
     j = 0;
     while (mapdata->mape[j])
     {
-       strcpy(mapdata->copymap[j], mapdata->mape[j]);
+       ft_strcpy(mapdata->copymap[j], mapdata->mape[j]);
         j++;
     }
     return (0);

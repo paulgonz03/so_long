@@ -1,5 +1,7 @@
 #include "so_long.h"
 #include  "minilibx-linux/mlx.h"
+#include "libft/libft.h"
+
 
 int moves(t_map *mapdata)
 {
@@ -7,10 +9,10 @@ int moves(t_map *mapdata)
     mapdata->img->mlx = mlx_init();
     if (saveimg(mapdata->img) == 1)
     {
-        printf("error de saveimg\n"), 
+        ft_printf("Error:\nSaveimg\n"), 
         exit(EXIT_FAILURE);
     }
-    mapdata->img->win = mlx_new_window(mapdata->img->mlx, (strlen(mapdata->copymap[0]) -1) * TEXTURE_SIZE,  mapdata->readdata->lines * TEXTURE_SIZE, "so_long paula");
+    mapdata->img->win = mlx_new_window(mapdata->img->mlx, (ft_strlen(mapdata->copymap[0]) -1) * TEXTURE_SIZE,  mapdata->readdata->lines * TEXTURE_SIZE, "So_long paula");
     pixeltoimage(mapdata);
     mlx_hook(mapdata->img->win, CLOSEWIN, 0, closewin, mapdata->img);
     mlx_key_hook(mapdata->img->win, moveplyr, mapdata);

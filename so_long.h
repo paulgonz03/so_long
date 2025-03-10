@@ -9,9 +9,8 @@
 # include <unistd.h>
 # include <string.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+
+
 
 #define KEYA 97
 #define KEYS 115
@@ -77,15 +76,6 @@ typedef struct s_map
     t_readmap *readdata;
 } t_map;
 
-
-
-char	*get_next_line(int fd);
-char	*extract_line(char *aux_read);
-char	*remove_first_line(char *statica);
-int		mystrlen(char *str);
-char	*mystrjoin(char *statica, char *aux_read);
-char	*get_read(int fd, char *statica);
-char	*aux_get_read(int fd, char *statica, char *aux_read);
 char **readmap(char **argv, t_map *mapdata);
 int main(int argc,char **argv);
 int checkmap(t_map *mapdata);
@@ -105,7 +95,7 @@ void moveup(t_map *mapdata);
 void movedown(t_map *mapdata);
 void moveright(t_map *mapdata);
 void moveleft(t_map *mapdata);
-int checkallmap(char **argv, t_map *mapdata);
+int checkallmap(char **argv, t_map *mapdata, int i);
 int closewin(t_img *img);
 int moves (t_map *mapdata);
 void ft_free(char **map);
